@@ -52,7 +52,7 @@ devcontainer up \
 
 PostgreSQL用devcontainer内では、次のコマンドでproduction環境を準備できます。
 
-このdevcontainerでは、PostgreSQLの接続先が`POSTGRES_DATABASE_URL`へ設定されています。通常のdevelopmentモードには適用されず、productionモードだけがこの値を使用します。AWSでは`DATABASE_URL`を使用します。
+このdevcontainerではPostgreSQL 18を起動し、接続先を`POSTGRES_DATABASE_URL`へ設定します。通常のdevelopmentモードには適用されず、productionモードだけがこの値を使用します。AWSでは`DATABASE_URL`を使用します。
 
 ```bash
 export RAILS_ENV=production

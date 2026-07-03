@@ -11,7 +11,7 @@ services:
         condition: service_healthy
 
   db:
-    image: postgres:17-bookworm
+    image: postgres:18-bookworm
     restart: unless-stopped
     environment:
       POSTGRES_DB: rails_dojo_production
