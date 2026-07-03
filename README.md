@@ -33,3 +33,30 @@ bin/rails server
 
 このリポジトリは第7週 Git 基礎演習用です。
 第6週の CRUD デバッグ演習用リポジトリとは異なり、最初から正常に動く状態です。
+
+## productionモードの確認
+
+通常のdevelopmentモードとtest環境ではSQLite3を使用します。
+
+AWSデプロイ授業で使用するproductionモードだけ、`DATABASE_URL`で指定したPostgreSQLへ接続します。
+
+PostgreSQLを使ったローカル確認では、`.devcontainer/postgres/devcontainer.json`を選択してdevcontainerを起動してください。通常の`.devcontainer/devcontainer.json`にはPostgreSQLを追加していません。
+
+Dev Container CLIを使う場合は、このリポジトリのルートディレクトリで次を実行します。
+
+```bash
+devcontainer up \
+  --workspace-folder . \
+  --config .devcontainer/postgres/devcontainer.json
+```
+
+PostgreSQL用devcontainer内では、次のコマンドでproduction環境を準備できます。
+
+このdevcontainerでは、PostgreSQLの接続先が`POSTGRES_DATABASE_URL`へ設定されています。通常のdevelopmentモードには適用されず、productionモードだけがこの値を使用します。AWSでは`DATABASE_URL`を使用します。
+
+```bash
+export RAILS_ENV=production
+export SECRET_KEY_BASE="$(bin/rails secret)"
+bin/rails db:prepare
+bin/rails server -b 0.0.0.0 -p 3000
+```
